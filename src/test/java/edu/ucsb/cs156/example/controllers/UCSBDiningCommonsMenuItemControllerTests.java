@@ -271,14 +271,14 @@ public class UCSBDiningCommonsMenuItemControllerTests extends ControllerTestCase
                                 .build();
 
                 UCSBDiningCommonsMenuItem commonsMenuItem1Edited = UCSBDiningCommonsMenuItem.builder()
-                                .diningCommonsCode("Ortega")
+                                .diningCommonsCode("Carrillo")
                                 .name("Tofu Banh Mi Sandwich (v)")
-                                .station("Entree Specials")
+                                .station("Entree")
                                 .build();
 
                 String requestBody = mapper.writeValueAsString(commonsMenuItem1Edited);
 
-                when(ucsbDiningCommonsMenuItemRepository.findById(eq(1L))).thenReturn(Optional.of(commonsMenuItem1Edited));
+                when(ucsbDiningCommonsMenuItemRepository.findById(eq(1L))).thenReturn(Optional.of(commonsMenuItem1));
 
                 // act
                 MvcResult response = mockMvc.perform(
