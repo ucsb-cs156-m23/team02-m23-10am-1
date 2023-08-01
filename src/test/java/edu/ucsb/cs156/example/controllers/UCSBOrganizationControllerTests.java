@@ -123,7 +123,7 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                 verify(ucsbOrganizationRepository, times(1)).findById(eq("jtest"));
                 Map<String, Object> json = responseToJson(response);
                 assertEquals("EntityNotFoundException", json.get("type"));
-                assertEquals("UCSBOrganization with id munger-hall not found", json.get("message"));
+                assertEquals("UCSBOrganization with id jtest not found", json.get("message"));
         }
 
         @WithMockUser(roles = { "USER" })
@@ -224,18 +224,18 @@ public class UCSBOrganizationControllerTests extends ControllerTestCase {
                         throws Exception {
                 // arrange
 
-                when(ucsbOrganizationRepository.findById(eq("t5"))).thenReturn(Optional.empty());
+                when(ucsbOrganizationRepository.findById(eq("jtest"))).thenReturn(Optional.empty());
 
                 // act
                 MvcResult response = mockMvc.perform(
-                                delete("/api/ucsborganization?orgCode=t5")
+                                delete("/api/ucsborganization?orgCode=jtest")
                                                 .with(csrf()))
                                 .andExpect(status().isNotFound()).andReturn();
 
                 // assert
-                verify(ucsbOrganizationRepository, times(1)).findById("munger-hall");
+                verify(ucsbOrganizationRepository, times(1)).findById("jtest");
                 Map<String, Object> json = responseToJson(response);
-                assertEquals("UCSBOrganization with id t5 not found", json.get("message"));
+                assertEquals("UCSBOrganization with id jtest not found", json.get("message"));
         }
 
         @WithMockUser(roles = { "ADMIN", "USER" })
